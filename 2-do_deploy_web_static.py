@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """Deploy archive!"""
-from fabric.api import put, run, env
+from fabric.api import put, run, env, local
 from os import path
-from fabric.api import local
 from time import strftime
 
 env.hosts = ['54.237.88.98', '35.153.67.97']
@@ -44,4 +43,4 @@ def do_deploy(archive_path):
         print('New version deployed!')
         return True
     except Exception as e:
-        return None
+        return False
