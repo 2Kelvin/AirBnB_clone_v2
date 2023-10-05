@@ -17,15 +17,15 @@ def do_deploy(archive_path):
     webStaticFilePath = f'/data/web_static/releases/{archfileNotgz}/'
 
     put(archive_path, '/tmp/')
-    run(f'mkdir -p {webStaticFilePath}')
-    run(f'tar -xzf /tmp/{archfile} -C {webStaticFilePath}')
+    run(f'sudo mkdir -p {webStaticFilePath}')
+    run(f'sudo tar -xzf /tmp/{archfile} -C {webStaticFilePath}')
 
-    run(f'rm /tmp/{archfile}')
-    run(f'mv {webStaticFilePath}web_static/* {webStaticFilePath}')
-    run(f'rm -rf {webStaticFilePath}web_static')
+    run(f'sudo rm /tmp/{archfile}')
+    run(f'sudo mv {webStaticFilePath}web_static/* {webStaticFilePath}')
+    run(f'sudo rm -rf {webStaticFilePath}web_static')
 
     symbolicLink = '/data/web_static/current'
-    run(f'rm -rf {symbolicLink}')
-    run(f'ln -s {webStaticFilePath} {symbolicLink}')
+    run(f'sudo rm -rf {symbolicLink}')
+    run(f'sudo ln -s {webStaticFilePath} {symbolicLink}')
     print('New version deployed!')
     return True
