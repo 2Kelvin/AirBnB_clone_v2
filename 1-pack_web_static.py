@@ -6,7 +6,7 @@ from time import strftime
 
 def do_pack():
     """Compress web_static folder to tgz format"""
-    local('mkdir -p versions')
+    local('mkdir versions')
     compressedFile = f'web_static_{strftime("%Y%m%d%H%M%S")}'
     filePath = f'versions/{compressedFile}.tgz'
     cmd_tgz = local(f'tar -czvf {filePath} web_static')
