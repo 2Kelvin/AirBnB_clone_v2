@@ -2,17 +2,16 @@
 """Compressing before sending"""
 from fabric.api import local
 from time import strftime
+from datetime import datetime
 
 
 def do_pack():
     """Compress web_static folder to tgz format"""
+    myTime = datetime.now().strftime("%Y%m%d%H%M%S")
     local('mkdir versions')
-    compressedFile = f'web_static_{strftime("%Y%m%d%H%M%S")}'
+    compressedFile = f'web_static_{myTime}'
     filePath = f'versions/{compressedFile}.tgz'
-    print(f'Packing web_static to {filePath}')
-    print(f'[localhost] local: tar -cvzf {filePath} web_static')
     cmd_tgz = local(f'tar -czvf {filePath} web_static')
-    print('\nDone.')
     if cmd_tgz.succeeded:
         return filePath
     else:
