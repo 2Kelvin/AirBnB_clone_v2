@@ -22,7 +22,7 @@ def do_deploy(archive_path):
     run(f'sudo tar -xzf /tmp/{archfile} -C {webStaticFilePath}')
 
     run(f'sudo rm -r /tmp/{archfile}')
-    run(f'sudo mv {webStaticFilePath}* {webStaticFilePath}')
+    run(f'sudo mv {webStaticFilePath}web_static/* {webStaticFilePath}')
     run(f'sudo rm -rf {webStaticFilePath}web_static')
 
     symbolicLink = '/data/web_static/current'
