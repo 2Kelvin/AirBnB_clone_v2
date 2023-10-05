@@ -10,6 +10,7 @@ def do_pack():
     compressedFile = f'web_static_{strftime("%Y%m%d%H%M%S")}'
     filePath = f'versions/{compressedFile}.tgz'
     print(f'Packing web_static to {filePath}')
+    print(f'[localhost] local: tar -cvzf {filePath} web_static')
     cmd_tgz = local(f'tar -czvf {filePath} web_static')
     if cmd_tgz.succeeded:
         return filePath
