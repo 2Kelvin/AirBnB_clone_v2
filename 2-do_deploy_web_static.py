@@ -20,10 +20,8 @@ def do_deploy(archive_path):
     webStaticFilePath = '/data/web_static/releases/'
     run(f'sudo tar -xzf /tmp/{archfile} -C {webStaticFilePath}')
 
-    if run(f'test -d /tmp/{archive_path}', warn_only=True).failed:
-        pass
-    else:
-        run(f'sudo rm -r /tmp/{archive_path}')
+    run('sudo chown -R ubuntu:ubuntu /tmp/')
+    run(f'sudo rm -r /tmp/{archive_path}')
 
     symbolicLink = '/data/web_static/current'
     run(f'sudo rm -rf {symbolicLink}')
