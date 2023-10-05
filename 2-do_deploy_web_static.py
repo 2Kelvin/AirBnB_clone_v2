@@ -14,9 +14,11 @@ def do_deploy(archive_path):
     if not path.exists(archive_path) or path.isfile(archive_path) is False:
         return False
     put(archive_path, '/tmp/')
+    archfile = archive_path.split('/')[-1]
     fileName = archive_path.split("/")[-1].split(".")[0]
+    run('sudo mkdir -p /data/web_static/releases')
     webStaticFilePath = f'/data/web_static/releases/{fileName}'
-    run(f'sudo tar -xzf /tmp/{archive_path} -C {webStaticFilePath}')
+    run(f'sudo tar -xzf /tmp/{archfile} -C {webStaticFilePath}')
     run(f'sudo rm -r /tmp/{archive_path}')
 
     symbolicLink = '/data/web_static/current'
