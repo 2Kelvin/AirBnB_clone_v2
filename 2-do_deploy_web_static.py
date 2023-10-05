@@ -15,13 +15,15 @@ def do_deploy(archive_path):
         return False
     put(archive_path, '/tmp/')
     archfile = archive_path.split('/')[-1]
+    archfileNotgz = archive_path.split('/')[-1].split('.')[0]
     # dirVersions = archive_path.split("/")[0]
-    # run('sudo mkdir -p /data/web_static/releases')
-    webStaticFilePath = '/data/web_static/releases/'
+    webStaticFilePath = f'/data/web_static/releases/{archfileNotgz}/'
+    run(f'sudo mkdir -p {webStaticFilePath}')
     run(f'sudo tar -xzf /tmp/{archfile} -C {webStaticFilePath}')
 
-    run('sudo chown -R ubuntu:ubuntu /tmp/')
-    run(f'sudo rm -r /tmp/{archive_path}')
+    run(f'sudo rm -r /tmp/{archfile}')
+    run(f'sudo mv {webStaticFilePath}* {webStaticFilePath}')
+    run(f'sudo rm -rf {webStaticFilePath}web_static')
 
     symbolicLink = '/data/web_static/current'
     run(f'sudo rm -rf {symbolicLink}')
