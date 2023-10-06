@@ -10,7 +10,7 @@ def cleanSandbox(number=0):
     arrayArchives = local('ls -1t versions', capture=True)
     arrayArchives = arrayArchives.split('\n')
     num = int(number)
-    if num is 0 or num is 1:
+    if num in (0, 1):
         num = 1
     print(len(arrayArchives[num:]))
     for n in arrayArchives[num:]:
@@ -23,12 +23,13 @@ def cleanServers(number=0):
     arrayArchives = arrayArchives.split('\r\n')
     print(arrayArchives)
     num = int(number)
-    if num is 0 or num is 1:
+    if num in (0, 1):
         num = 1
     print(len(arrayArchives[num:]))
     for x in arrayArchives[num:]:
-        if x is not 'test':
-            run('rm -rf /data/web_static/releases/' + x)
+        if x is 'test':
+            continue
+        run('rm -rf /data/web_static/releases/' + x)
 
 
 def do_clean(number=0):
