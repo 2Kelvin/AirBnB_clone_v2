@@ -11,21 +11,22 @@ def do_deploy(archive_path):
 
     if not path.exists(archive_path) or path.isfile(archive_path) is False:
         return False
-    archfile = archive_path.split('/')[-1]
-    archfileNotgz = archive_path.split('/')[-1].split('.')[0]
-    # dirVersions = archive_path.split("/")[0]
-    webStaticFilePath = f'/data/web_static/releases/{archfileNotgz}/'
 
-    put(archive_path, '/tmp/')
-    run(f'sudo mkdir -p {webStaticFilePath}')
-    run(f'sudo tar -xzf /tmp/{archfile} -C {webStaticFilePath}')
+    fileNameWithTgz = archive_path.split('/')[-1]
+    fileNameWithoutExt = archive_path.split('/')[-1].split('.')[0]
+    webServerFolder = f'/data/web_static/releases/{fileNameWithoutExt}'
 
-    run(f'sudo rm /tmp/{archfile}')
-    run(f'sudo mv {webStaticFilePath}web_static/* {webStaticFilePath}')
-    run(f'sudo rm -rf {webStaticFilePath}web_static')
+    put(archive_path, f'/tmp/{fileNameWithTgz}')
 
-    symbolicLink = '/data/web_static/current'
-    run(f'sudo rm -rf {symbolicLink}')
-    run(f'sudo ln -s {webStaticFilePath} {symbolicLink}')
+    run(f'sudo mkdir -p {webServerFolder}/')
+    run(f'sudo tar -xzf /tmp/{fileNameWithTgz} -C {webServerFolder}/')
+
+    run(f'sudo rm /tmp/{fileNameWithTgz}')
+    run(f'sudo mv {webServerFolder}/web_static/* {webServerFolder}/')
+    run(f'sudo rm -rf {webServerFolder}/web_static')
+
+    # deleting & creating symbolic link
+    run('sudo rm -rf /data/web_static/current')
+    run(f'sudo ln -s {webServerFolder}/ /data/web_static/current')
     print('New version deployed!')
     return True
