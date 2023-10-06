@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """Keep it clean!"""
-from fabric.api import run, lcd, local, cd
+from fabric.api import run, lcd, local, cd, env
 from os import listdir
+
+env.hosts = ['54.237.88.98', '35.153.67.97']
 
 
 def do_clean(number=0):
