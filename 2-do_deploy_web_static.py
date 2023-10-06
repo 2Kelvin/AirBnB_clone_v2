@@ -14,19 +14,20 @@ def do_deploy(archive_path):
 
     fileNameWithTgz = archive_path.split('/')[-1]
     fileNameWithoutExt = archive_path.split('/')[-1].split('.')[0]
-    webServerFolder = f'/data/web_static/releases/{fileNameWithoutExt}'
+    webServerFolder = '/data/web_static/releases/{}'.format(fileNameWithoutExt)
 
-    put(archive_path, f'/tmp/{fileNameWithTgz}')
+    put(archive_path, '/tmp/{}'.format(fileNameWithTgz))
 
-    run(f'sudo mkdir -p {webServerFolder}/')
-    run(f'sudo tar -xzf /tmp/{fileNameWithTgz} -C {webServerFolder}/')
+    run('sudo mkdir -p {}/'.format(webServerFolder))
+    run('sudo tar -xzf /tmp/{} -C {}/'.
+        format(fileNameWithTgz, webServerFolder))
 
-    run(f'sudo rm /tmp/{fileNameWithTgz}')
-    run(f'sudo mv {webServerFolder}/web_static/* {webServerFolder}/')
-    run(f'sudo rm -rf {webServerFolder}/web_static')
+    run('sudo rm /tmp/{}'.format(fileNameWithTgz))
+    run('sudo mv {}/web_static/* {}/'.format(webServerFolder, webServerFolder))
+    run('sudo rm -rf {}/web_static'.format(webServerFolder))
 
     # deleting & creating symbolic link
     run('sudo rm -rf /data/web_static/current')
-    run(f'sudo ln -s {webServerFolder}/ /data/web_static/current')
+    run('sudo ln -s {}/ /data/web_static/current'.format(webServerFolder))
     print('New version deployed!')
     return True

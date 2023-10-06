@@ -8,11 +8,12 @@ from os import path
 def do_pack():
     """Compress web_static folder to tgz format"""
     local('mkdir -p versions')
-    compressedFile = f'web_static_{strftime("%Y%m%d%H%M%S")}'
-    filePath = f'versions/{compressedFile}.tgz'
-    print(f'Packing web_static to {filePath}')
-    cmd_tgz = local(f'tar -czvf {filePath} web_static')
-    print(f'web_static packed: {filePath} -> {path.getsize(filePath)}Bytes')
+    compressedFile = 'web_static_{}'.format(strftime("%Y%m%d%H%M%S"))
+    filePath = 'versions/{}.tgz'.format(compressedFile)
+    print('Packing web_static to {}'.format(filePath))
+    cmd_tgz = local('tar -czvf {} web_static'.format(filePath))
+    print('web_static packed: {} -> {}Bytes'.
+          format(filePath, path.getsize(filePath)))
     if cmd_tgz.succeeded:
         return filePath
     else:
