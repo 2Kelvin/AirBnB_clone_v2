@@ -29,7 +29,8 @@ def cIsFun(text):
 @flaskApp.route('/python', strict_slashes=False)
 def pythonIsCool(text='is cool'):
     """Displays route python"""
-    if text: text = text.replace('_', ' ')
+    if text:
+        text = text.replace('_', ' ')
     return 'Python {}'.format(escape(text))
 
 
