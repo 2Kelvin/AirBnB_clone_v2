@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-"""Contains route /"""
-from web_flask import createFlaskApp
+"""Module containing flask app"""
+from flask import Flask
 
-flaskApp = createFlaskApp()
+flaskApp = Flask(__name__)
 
 
 @flaskApp.route('/', strict_slashes=False)
