@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Flask application factory"""
 from flask import Flask
 

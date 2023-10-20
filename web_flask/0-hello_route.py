@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Contains route /"""
 from web_flask import createFlaskApp
 
