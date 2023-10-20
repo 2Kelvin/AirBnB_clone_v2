@@ -9,3 +9,4 @@ def createFlaskApp():
     """
     app = Flask(__name__)
     return app
+
