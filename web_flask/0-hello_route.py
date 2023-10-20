@@ -5,11 +5,11 @@ from flask import Flask
 flaskApp = Flask(__name__)
 
 
-@flaskApp.route('/', strict_slashes=False)
+@flaskApp.route("/", strict_slashes=False)
 def helloHBNB():
-    """Route / to display hello HBNB"""
-    return 'Hello HBNB!'
+    """Display hello HBNB"""
+    return "Hello HBNB!"
 
-if __name__ == '__main__':
-    flaskApp.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    flaskApp.run(host="0.0.0.0", port=5000)
 
