@@ -16,6 +16,6 @@ def hbnb():
     """Displays HBNB"""
     return 'HBNB'
 
+
 if __name__ == '__main__':
     flaskApp.run(host='0.0.0.0', port=5000)
-

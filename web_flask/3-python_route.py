@@ -33,6 +33,6 @@ def pythonIsCool(text='is cool'):
         text = text.replace('_', ' ')
     return 'Python {}'.format(escape(text))
 
+
 if __name__ == '__main__':
     flaskApp.run(host='0.0.0.0', port=5000)
-

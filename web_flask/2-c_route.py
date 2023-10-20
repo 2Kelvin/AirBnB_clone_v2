@@ -24,6 +24,6 @@ def cIsFun(text):
     spaceText = text.replace('_', ' ')
     return 'C {}'.format(escape(spaceText))
 
+
 if __name__ == '__main__':
     flaskApp.run(host='0.0.0.0', port=5000)
-

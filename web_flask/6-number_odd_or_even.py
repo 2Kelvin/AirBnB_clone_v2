@@ -52,6 +52,6 @@ def numberOddOrEvenTemplate(n):
     """Template to render an even or odd number"""
     return render_template('6-number_odd_or_even.html', num=n)
 
+
 if __name__ == '__main__':
     flaskApp.run(host='0.0.0.0', port=5000)
-
