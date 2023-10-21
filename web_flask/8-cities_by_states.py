@@ -17,8 +17,8 @@ def teardownSession(self):
 @flaskApp.route('/cities_by_states', strict_slashes=False)
 def cities_by_states():
     """Route to render states list"""
-    states = storage.all(State)
-    return render_template('8-cities_by_states.html', states=states)
+    dataStates = storage.all(State).values()
+    return render_template('8-cities_by_states.html', states=dataStates)
 
 
 if __name__ == '__main__':
