@@ -2,7 +2,6 @@
 """Module contains list of states template rendered by Flask"""
 from flask import Flask, render_template
 from models import storage
-from models.state import State
 
 
 flaskApp = Flask(__name__)
@@ -17,8 +16,8 @@ def teardownSession(self):
 @flaskApp.route('/states_list', strict_slashes=False)
 def statesList():
     """Route to render states list"""
-    allStates = storage.all(State)
-    return render_template('7-states_list.html', allStates)
+    states = storage.all()
+    return render_template('7-states_list.html', allStates=states)
 
 
 if __name__ == '__main__':
