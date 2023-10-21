@@ -9,7 +9,7 @@
             {% for eachState in allStates | sort(attribute='name') %}
             <LI>{{ eachState.id }}: <B>{{ eachState.name }}</B>
                 <UL>
-                    {% for cty in eachState.cities | sort(attribute='name') %}
+                    {% for cty in eachState.cities.all() | sort(attribute='name') %}
                     <LI>{{ cty.id }}: <B>{{ cty.name }}</B></LI>
                     {% endfor %}
                 </UL>
