@@ -9,7 +9,7 @@ flaskApp = Flask(__name__)
 
 
 @flaskApp.teardown_appcontext
-def teardownSession():
+def teardownSession(self):
     """Teardown method to remove the SQLAlchemy session"""
     storage.close()
 
