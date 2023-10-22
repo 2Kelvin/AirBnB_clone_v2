@@ -15,17 +15,20 @@ def teardownSession(self):
 
 
 @flaskApp.route('/states', strict_slashes=False)
-def citiesDisplayed():
+def statesRoute():
     """Route to render states_list route"""
     dataStates = storage.all(State).values()
-    return render_template('7-states_list.html', states=dataStates)
+    return render_template('9-states.html', states=dataStates, spef='all')
 
 
-@flaskApp.route('/states/<string:id>', strict_slashes=False)
-def idStates(id=None):
+@flaskApp.route('/states/<id>', strict_slashes=False)
+def idStates(id):
     """Render a specific state using it's passed in id"""
-    data = storage.all(State).get(f'State.{id}')
-    return render_template('9-states.html', states=data)
+    statesData = storage.all(State).values()
+    for st in statesData:
+        if st.id == id:
+            return render_template('9-states.html', states=st, spef='id')
+    return render_template('9-states.html', states=st, spef='none')
 
 
 if __name__ == '__main__':
