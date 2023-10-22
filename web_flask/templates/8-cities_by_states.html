@@ -9,11 +9,9 @@
             {% for aState in states | sort(attribute='name') %}
             <LI>{{ aState.id }}: <B>{{ aState.name }}</B>
                 <UL>
-                {% for aCity in cities | sort(attribute='name') %}
-                  {% if aCity.state_id == aState.id %}
+                    {% for aCity in aState.cities | sort(attribute='name') %}
                     <LI>{{ aCity.id }}: <B>{{ aCity.name }}</B></LI>
-                  {% endif %}
-                {% endfor %}
+                    {% endfor %}
                 </UL>
             </LI>
             {% endfor %}
