@@ -3,6 +3,7 @@
 from flask import Flask, render_template
 from models import storage
 from models.state import State
+from models.city import City
 
 
 flaskApp = Flask(__name__)
@@ -14,18 +15,15 @@ def teardownSession(self):
     storage.close()
 
 
-@flaskApp.route('/states_list', strict_slashes=False)
-def statesList():
-    """Route to render states list"""
-    states = storage.all(State).values()
-    return render_template('7-states_list.html', allStates=states)
-
-
 @flaskApp.route('/cities_by_states', strict_slashes=False)
 def citiesDisplayed():
     """Route to render states list"""
     dataStates = storage.all(State).values()
-    return render_template('8-cities_by_states.html', states=dataStates)
+    dataCities = storage.all(City).values()
+    return render_template('8-cities_by_states.html',
+                           states=dataStates,
+                           cities=dataCities
+                           )
 
 
 if __name__ == '__main__':
