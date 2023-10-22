@@ -17,6 +17,15 @@ host = os.environ.get('HBNB_MYSQL_HOST')
 db = os.environ.get('HBNB_MYSQL_DB')
 dbEnv = os.environ.get('HBNB_ENV')
 
+appClasses = {
+    'Amenity': Amenity,
+    'City': City,
+    'Place': Place,
+    'State': State,
+    'Review': Review,
+    'User': User
+}
+
 
 class DBStorage():
     """Database storage class
@@ -47,20 +56,19 @@ class DBStorage():
         Args:
             cls: class name argument
         """
-        dbDict = {}
+        if not self.__session:
+            self.reload()
+        allObjs = {}
+        if type(cls) == str:
+            cls = appClasses.get(cls, None)
         if cls:
-            if type(cls) is str:
-                cls = eval(cls)
-            for d in self.__session.query(cls):
-                dky = f'{type(d).__name__}.{d.id}'
-                dbDict[dky] = d
-            else:
-                allClasses = [Amenity, City, Place, Review, State, User]
-                for eachCls in allClasses:
-                    for dd in self.__session.query(eachCls):
-                        ddky = f'{type(dd).__name__}.{dd.id}'
-                        dbDict[ddky] = dd
-            return dbDict
+            for inst in self.__session.query(cls):
+                allObjs[inst.__class__.__name__ + '.' + inst.id] = inst
+        else:
+            for cls in appClasses.values():
+                for inst2 in self.__session.query(cls):
+                    allObjs[inst2.__class__.__name__ + '.' + inst2.id] = inst2
+        return allObjs
 
     def new(self, obj):
         """Add the instance to database
