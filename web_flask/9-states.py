@@ -18,7 +18,7 @@ def teardownSession(self):
 def statesRoute():
     """Route to render states_list route"""
     dataStates = storage.all(State).values()
-    return render_template('9-states.html', states=dataStates, spef='all')
+    return render_template('9-states.html', states=dataStates, mode='all')
 
 
 @flaskApp.route('/states/<id>', strict_slashes=False)
@@ -27,8 +27,8 @@ def idStates(id):
     statesData = storage.all(State).values()
     for st in statesData:
         if st.id == id:
-            return render_template('9-states.html', states=st, spef='id')
-    return render_template('9-states.html', states=st, spef='none')
+            return render_template('9-states.html', states=st, mode='id')
+    return render_template('9-states.html', states=st, mode='none')
 
 
 if __name__ == '__main__':
