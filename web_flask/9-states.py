@@ -21,7 +21,7 @@ def citiesDisplayed():
     return render_template('7-states_list.html', states=dataStates)
 
 
-@flaskApp.route('/states/<id>', strict_slashes=False)
+@flaskApp.route('/states/<string:id>', strict_slashes=False)
 def idStates(id=None):
     """Render a specific state using it's passed in id"""
     data = storage.all(State).get(f'State.{id}')
